@@ -1,0 +1,12 @@
+/* 初始化样式 */
+body {
+  box-sizing: border-box;
+  font-family: 'Merriweather', 'Open Sans', 'Hiragino Sans GB', 'Microsoft Yahei', 'WenQuanYi Micro Hei', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Helvetica', 'Arial', 'sans-serif';
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+blockquote, body, button, dd, div, dl, dt, form, h1, h2, h3, h4, h5, h6, html, iframe, img, input, li, ol, p, select, table, td, textarea, th, ul {
+    margin: 0;
+    padding: 0;
+}

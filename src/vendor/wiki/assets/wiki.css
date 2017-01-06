@@ -1,0 +1,15 @@
+.rain-wiki a {
+    color: #1abc9c;
+    text-decoration: none;
+    cursor: pointer;
+    text-transform: capitalize;
+    border-bottom: .0625rem dashed #eee;
+}
+.wiki-title {
+    font-size: 17px;
+    color: #333;
+}
+.wiki-meta {
+    margin-top: 10px;
+    padding-bottom: 7px;
+}
