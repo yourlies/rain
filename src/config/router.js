@@ -1,5 +1,5 @@
 export default {
-    router: {
-        
+    routes: {
+        //
     }
 }

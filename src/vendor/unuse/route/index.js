@@ -1,2 +1,0 @@
-export routerConfig from './router';
-

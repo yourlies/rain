@@ -4,6 +4,7 @@ import ltrim from 'locutus/php/strings/ltrim';
 import ucfirst from 'locutus/php/strings/ucfirst';
 import time from 'locutus/php/datetime/time';
 import explode from 'locutus/php/strings/explode';
+import implode from 'locutus/php/strings/implode';
 import http_build_query from 'locutus/php/url/http_build_query';
 
 export default {
@@ -14,4 +15,5 @@ export default {
     ucfirst: ucfirst,
     explode: explode,
     http_build_query: http_build_query,
+    implode: implode
 };

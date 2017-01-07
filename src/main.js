@@ -6,8 +6,6 @@ import { routes } from './vendor/route';
 import welcome from './vendor/wiki/components/welcome';
 import wiki from './vendor/wiki/components/welcome';
 
-console.log(routes);
-
 // 装载vue-router
 Vue.use(VueRouter);
 

@@ -20,7 +20,9 @@ const readClassification = function (object, dir, index = 0) {
     if (dir.length == index) {
         return object;
     } else {
-        return readClassification(object[dir[index]], dir, index + 1);
+        return dir.length == 1
+        ? object['./'][dir[index]]
+        : readClassification(object[dir[index]], dir, index + 1);
     }
 }
 //渲染md为html
