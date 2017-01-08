@@ -1,0 +1,56 @@
+.rain-body {
+    margin: 0 120px;
+}
+.rain-banner {
+    width: 720px;
+    height: 450px;
+    margin: auto;
+    background-image: url('../assets/cover.png');
+    background-size: 720px 450px;
+}
+.rain-footer {
+    font-size: .875rem;
+    margin-top: 40px;
+}
+/*  */
+textarea {
+    border: none;
+    border-right: 1px solid #ccc;
+    resize: none;
+    outline: none;
+    background-color: #f6f6f6;
+    font-size: 14px;
+    font-family: 'Monaco', courier, monospace;
+    padding: 20px;
+}
+a {
+    outline: none!important;
+    text-decoration: none!important;
+    color: #1abc9c;
+}
+/* rain样式 */
+.rain-wiki {
+    margin: 10px;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #888;
+    background-color: #fbfbfb;
+}
+.rain-header__title {
+    margin-right: 150px;
+    margin-bottom: 0;
+    font-weight: 300;
+    line-height: 1.125;
+    word-wrap: break-word;
+}
+.rain-header__meta {
+    margin-top: 6px;
+    padding-bottom: 15px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #767676;
+    border-bottom: 1px solid #eee;
+}
+.rain-wiki textarea {
+    width: 100%;
+}
