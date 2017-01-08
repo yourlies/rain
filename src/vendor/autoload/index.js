@@ -1,0 +1,1 @@
+export { appOptions } from './merge';
