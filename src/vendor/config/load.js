@@ -1,1 +1,1 @@
-export default ['route'];
+export default ['route', 'vuex'];

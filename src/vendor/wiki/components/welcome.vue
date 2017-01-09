@@ -11,6 +11,7 @@
 </template>
 <script>
 import marked from 'marked';
+import { mapGetters } from 'vuex';
 
 export default {
     data () {
@@ -18,14 +19,16 @@ export default {
             document: '_welcome_',
         }
     },
+    computed: {
+    },
     methods: {
         marked (str) {
             return marked(str);
-        }
+        },
     },
     mounted () {
         //
-    },
+    }
 }
 </script>
 <style>

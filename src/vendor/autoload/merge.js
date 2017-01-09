@@ -20,29 +20,37 @@ class AutoLoad {
         // 框架模块配置
         this.vendorModuleConfig = vendorModuleConfig;
         // 框架模块
-        this.vendorModule = {};
+        this.vendorModule = [];
         // 程序入口配置选项
         this.appOptions = {};
     }
     // 加载程序入口配置选项
     loadAppOptions () {
+        // 设置程序文档结点
         this.appOptions.el = '#app';
+        // 设置程序模板
         this.appOptions.template = '<App />';
+        // 设置程序根组件
         this.appOptions.components = { App };
-        for (let [key, value] of Object.entries(this.vendorModule)) {
-            Object.assign(this[key], value);
-        }
+        this.vendorModule.map((vendorModule) => {
+            // 循环加载模块并将其赋值
+            for (let [key, value] of Object.entries(vendorModule)) {
+                Object.assign(this[key], value);
+            }
+        })
     }
     // 加载框架内部模块
     loadVendorModule () {
+        // 循环加载模块
         for (let [key, value] of Object.entries(vendorModuleConfig)) {
             const module = require('../' + value + '/load');
-            Object.assign(this.vendorModule, module.default);
+            this.vendorModule.push(module.default);
         }
     }
 }
-
+// 实例化autoload
 const options = new AutoLoad();
+// 程序配置选项
 const appOptions = options.appOptions;
 
 export { appOptions };
