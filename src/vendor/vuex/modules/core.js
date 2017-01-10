@@ -1,8 +1,8 @@
 // state
 const state = {
-    //定义钩子函数组件
+    // 定义钩子函数组件
     isTriggered: 0, hook: { subscriptions: [] },
-    //定义代理事件数据
+    // 定义代理事件数据
     isBubbled: 0, delegation: { subscriptions: [] },
 }
 // getters
@@ -18,7 +18,7 @@ const getters = {
 const actions = {
     // 触发钩子事件
     triggerHook ({ commit }, subscription) {
-        commit('TRIGGER_HOOK', { subscription });
+        commit('TRIGGER_HOOK', subscription);
     },
     // 清除钩子事件
     resolveHookSubscriptions ({ commit }) {

@@ -1,1 +1,1 @@
-export default ['route', 'vuex', 'core'];
+export default ['route', 'vuex', 'core', 'model'];

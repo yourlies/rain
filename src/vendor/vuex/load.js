@@ -2,23 +2,21 @@
 import Vue from 'vue';
 // 加载vue-router
 import Vuex from 'vuex';
-// 
+// 加载core模块
 import core from './modules/core';
-
-// 在vue中使用vue-router
+// 在vue中使用vuex
 Vue.use(Vuex);
-
-// 实例化vue-router
+// 配置store参数
 const store = new Vuex.Store({
     modules: {
         core
     }
 });
-// 配置参数
+// 配置程序参数
 const options = {
     appOptions: {
         store
     }
 }
-// 输出router
+// 输出程序配置
 export default options;
