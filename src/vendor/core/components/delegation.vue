@@ -2,7 +2,8 @@
 <script>
 import Func from '../../lib';
 import { mapGetters } from 'vuex';
-import subscribers from '../../model';
+import plugin from '../../autoload/plugin';
+const subscribers = plugin.model;
 
 const delegation = {
     data () {

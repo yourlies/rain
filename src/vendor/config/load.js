@@ -1,1 +1,4 @@
-export default ['route', 'vuex', 'core', 'model'];
+export default {
+    module: ['route', 'vuex', 'core'],
+    plugin: ['model']
+};
