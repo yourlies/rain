@@ -1,12 +1,19 @@
+<template></template>
 <script>
-// import hooks from '../plugin';
-// import { actions, getters } from '../vuex';
+import Func from '../../lib';
+import { mapGetters } from 'vuex';
 
 export default {
     data () {
         return {
             subscriptions: { unresolved: [], resolved: [] },
         };
+    },
+    computed: {
+        ...mapGetters({
+            isTriggered: 'getHookListener',
+            unresolvedSubscriptions: 'getHookSubscriptions'
+        })
     },
     methods: {
         handle () {
@@ -19,18 +26,18 @@ export default {
                 this.subscriptions.resolved.push(subscription);
             }
         },
+        resolveSubscriptions () {
+            this.$store.dispatch('resolveHookSubscriptions');
+        },
+        trigger (subscription) {
+            this.$store.dispatch('triggerHook', subscription);
+        },
         call (method) {
-            hooks.trigger(method);
+            // hooks.trigger(method);
         },
     },
-    vuex: {
-        getters: {
-            isTriggered: getters.getHookListener,
-            unresolvedSubscriptions: getters.getHookSubscriptions,
-        },
-        actions: {
-            resolveSubscriptions: actions.resolveHookSubscriptions,
-        }
+    mounted () {
+        this.trigger('heiheihei');
     },
     watch: {
         isTriggered: function () {

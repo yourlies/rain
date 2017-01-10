@@ -1,1 +1,1 @@
-export { appOptions } from './merge';
+export { appOptions, appSetting } from './merge';

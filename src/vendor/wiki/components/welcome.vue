@@ -5,6 +5,7 @@
             <div class="rain-meta">
                 --您可以借助rain快速搭建网站
                 <a>我的博客</a>，<router-link to="/wiki">查看文档</router-link>
+                {{ test0 }}<a @click="bubble('heiheihei')">asd</a>
             </div>
         </div>
     </div>
@@ -20,14 +21,26 @@ export default {
         }
     },
     computed: {
+        // 
+        ...mapGetters({
+            test0: 'getHookListener'
+        })
     },
     methods: {
         marked (str) {
             return marked(str);
         },
+        bubble (subscription) {
+            this.$store.dispatch('bubbleDelegation', subscription, this);
+        }
     },
     mounted () {
         //
+    },
+    watch: {
+        test0 () {
+            console.log('asd')
+        }
     }
 }
 </script>

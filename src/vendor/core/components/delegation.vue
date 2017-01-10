@@ -1,9 +1,8 @@
+<template></template>
 <script>
-// import Func from '../lib';
-// import subscribers from '../model';
-// import { actions, getters } from '../vuex';
-// import vuexConfig from '../../config/vuex';
-// import delegationConfig from '../../config/vuex';
+import Func from '../../lib';
+import { mapGetters } from 'vuex';
+import subscribers from '../../model';
 
 const delegation = {
     data () {
@@ -11,19 +10,15 @@ const delegation = {
             subscriptions: { unresolved: [], resolved: [], current: {} },
         }
     },
-    vuex: {
-        getters: {
-            unresolvedSubscriptions: getters.getDelegationSubscriptions,
-            isBubbled: getters.getDelegationListener,
-        },
-        actions: {
-            resolveSubscriptions: actions.resolveDelegationSubscriptions,
-            triggerHook: actions.triggerHook,
-        }
+    computed: {
+        ...mapGetters({
+            unresolvedSubscriptions: 'getDelegationSubscriptions',
+            isBubbled: 'getDelegationListener',
+        })
     },
     methods: {
         trigger (subscription) {
-            this.triggerHook(subscription, this);
+            this.$store.dispatch('triggerHook', subscription, this);
         },
         resolved (id) {
             if (
@@ -36,6 +31,9 @@ const delegation = {
             if (this.subscriptions.length <= 0) {
                 this.trigger('loadingstop');
             }
+        },
+        resolveSubscriptions () {
+            this.$store.dispatch('resolveDelegationSubscriptions');
         },
         bubble (subscription, page, component, id) {
             subscribers.bubble(subscription, page, component, id);
@@ -71,8 +69,6 @@ const delegation = {
         },
     },
 }
-
-Object.assign(delegation.vuex.actions, vuexConfig.actions);
 
 export default delegation;
 </script>

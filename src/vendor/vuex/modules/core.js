@@ -21,16 +21,16 @@ const actions = {
         commit('TRIGGER_HOOK', { subscription });
     },
     // 清除钩子事件
-    resolveHookSubscriptions ({dispatch}) {
-        dispatch('RESOLVE_HOOK_SUBSCRIPTIONS');
+    resolveHookSubscriptions ({ commit }) {
+        commit('RESOLVE_HOOK_SUBSCRIPTIONS');
     },
     // 冒泡代理事件
-    bubbleDelegation ({ dispatch }, subscription, input) {
-        dispatch('BUBBLE_DELEGATION', subscription, input);
+    bubbleDelegation ({ commit }, subscription, input) {
+        commit('BUBBLE_DELEGATION', subscription, input);
     },
     // 清除代理事件
-    resolveDelegationSubscriptions ({ dispatch }) {
-        dispatch('RESOLVE_DELEGATION_SUBSCRIPTIONS');
+    resolveDelegationSubscriptions ({ commit }) {
+        commit('RESOLVE_DELEGATION_SUBSCRIPTIONS');
     }
 }
 // mutations
@@ -46,6 +46,7 @@ const mutations = {
     },
     // 冒泡代理事件
     BUBBLE_DELEGATION (state, subscription, page) {
+        console.log(subscription)
         state.isBubbled++;
         state.delegation.subscriptions.push({
             id: state.isBubbled,
