@@ -1,27 +1,23 @@
 import vendorLoadedConfig from '../config/load';
 
-// 加载类库函数
-import { Php, Func } from '../lib';
-// 加载根组件
-import App from '../../App';
-// 自动加载类
-class PluginAutoLoad {
-    constructor () {
+class Plugin {
+    constructor (vendorPluginConfig) {
         // 绑定类方法
         ::this.initialize;
         ::this.loadVendorPlugin;
-        //
-        this.initialize();
+        // 
+        this.initialize(vendorPluginConfig);
         this.loadVendorPlugin();
     }
 
-    initialize () {
+    initialize (vendorPluginConfig) {
         // 框架模块配置
-        this.vendorPluginConfig = vendorLoadedConfig.plugin;
-        //
+        this.vendorPluginConfig = vendorPluginConfig;
+        // 
+        this.vendorPluginSetting = {};
         this.vendorPlugin = {};
     }
-    //
+    // 
     loadVendorPlugin () {
         for (let [key, value] of Object.entries(this.vendorPluginConfig)) {
             const plugin = require('../' + value + '/load');
@@ -31,6 +27,6 @@ class PluginAutoLoad {
         }
     }
 }
-const options = new PluginAutoLoad();
+const options = new Plugin(vendorLoadedConfig.plugin);
 
 export default options.vendorPlugin;
