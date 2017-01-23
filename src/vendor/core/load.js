@@ -2,11 +2,13 @@
 import delegation from './components/delegation';
 // 加载框架页面交互控制组件
 import hook from './components/hook';
+// 框架内存通用管理组件
+import memory from './components/memory';
 // 输出程序配置
 export default {
     appSetting: {
         components: {
-            delegation, hook
+            delegation, hook, memory
         }
     }
 };

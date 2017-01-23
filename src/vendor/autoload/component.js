@@ -44,7 +44,7 @@ class Component {
         Vue.component('vendor-components', {
             render: function (createElement) {
                 return createElement('div',
-                    Array.apply(null, { length: 2 }).map((value, key) => {
+                    Array.apply(null, { length: components.length }).map((value, key) => {
                         return createElement(components[key], {
                             attrs: { class: 'core-' + key }
                         });
