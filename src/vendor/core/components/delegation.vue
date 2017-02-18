@@ -11,10 +11,15 @@ const delegation = {
             subscriptions: { unresolved: [], resolved: [], current: {} },
         }
     },
+    mounted () {
+        this.$store.dispatch('reportData', '白痴');
+        console.log(this.test)
+    },
     computed: {
         ...mapGetters({
             unresolvedSubscriptions: 'getDelegationSubscriptions',
             isBubbled: 'getDelegationListener',
+            test: 'getMonitoringData'
         })
     },
     methods: {

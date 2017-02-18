@@ -4,11 +4,13 @@ import delegation from './components/delegation';
 import hook from './components/hook';
 // 框架内存通用管理组件
 import memory from './components/memory';
+// 框架调试组件
+import helper from './components/helper';
 // 输出程序配置
 export default {
     appSetting: {
         components: {
-            delegation, hook, memory
+            delegation, hook, memory, helper
         }
     }
 };

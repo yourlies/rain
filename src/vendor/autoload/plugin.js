@@ -20,7 +20,7 @@ class Plugin {
     // 
     loadVendorPlugin () {
         for (let [key, value] of Object.entries(this.vendorPluginConfig)) {
-            const plugin = require('../' + value + '/load');
+            const plugin = require('../plugin/' + value + '/load');
             for (let [key, value] of Object.entries(plugin.default.vendorModulePlugin)) {
                 this.vendorPlugin[key] = value;
             }

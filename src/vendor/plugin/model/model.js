@@ -1,5 +1,5 @@
 //加载依赖模块
-import modelConfig from '../../config/model';
+import modelConfig from '../../../config/model';
 
 /*
  * @description: load加载类，加载博客模型类
@@ -22,7 +22,7 @@ class Model {
     loadModels () {
         for (let i = 0; i < this.models.length; i++) {
             const model = this.models[i];
-            this.subscriber[model] = require('../../model/' + model)['default'];
+            this.subscriber[model] = require('../../../model/' + model)['default'];
         }
     }
 
