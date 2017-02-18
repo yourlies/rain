@@ -6,8 +6,11 @@
         <a>hook</a>
     </div>
     <div class="data">
-        <div>unresolved: {{ monitoringData.delegation.unresolved }}</div>
-        <div>resolved: {{ monitoringData.delegation.resolved }}</div>
+        <div>unresolved: {{ xx.delegation.unresolved }}</div>
+        <div>resolved: {{ xx.delegation.resolved }}</div>
+        <div>current: {{ xx.delegation.current }}</div>
+        <div>workload: {{ xx.delegation.workload }}</div>
+        <div>subscribers: {{ xx.delegation.subscribers }}</div>
     </div>
 </div>
 </div>
@@ -18,14 +21,21 @@ import Func from '../../lib';
 import plugin from '../../autoload/plugin';
 
 export default {
+    data () {
+        return {
+            xx: {delegation: {}}
+        }
+    },
     computed: {
         ...mapGetters({
             monitoringData: 'getMonitoringData',
+            isChange: 'getDataListener',
         })
     },
-    mounted () {
-        console.log('test');
-        console.log(this.monitoringData);
+    watch: {
+        isChange: function () {
+            this.xx = this.monitoringData;
+        }
     }
 }
 </script>

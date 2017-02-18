@@ -8,7 +8,7 @@ const subscribers = plugin.model;
 const delegation = {
     data () {
         return {
-            subscriptions: { unresolved: [], resolved: [], current: {}, workload: 0 },
+            subscriptions: { unresolved: [], resolved: [], current: {}, workload: 0, subscribers: subscribers.config },
         }
     },
     computed: {
