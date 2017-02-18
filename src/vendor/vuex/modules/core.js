@@ -5,7 +5,7 @@ const state = {
     // 定义代理事件数据
     isBubbled: 0, delegation: { subscriptions: [] },
     // 
-    isApplied: 0, memory: { request: [] }
+    isApplied: 0, memory: { request: [], variable: [] }
 }
 // getters
 const getters = {
@@ -17,7 +17,8 @@ const getters = {
     getHookSubscriptions: state => state.hook.subscriptions,
     // 
     getAllocateListener: state => state.isApplied,
-    getAllocateRequest: state => state.memory.request
+    getAllocateRequest: state => state.memory.request,
+    getAllocateVariable: state => state.memory.variable
 }
 // actions
 const actions = {
@@ -40,6 +41,10 @@ const actions = {
     // 
     allocateMemory ({ commit }, variable) {
         commit('ALLOCATE_MEMORY', variable);
+    },
+    //
+    modifyMemory ({ commit }, variable) {
+        commit('MODIFY_MEMORY', variable)
     },
     //
     resolveAllocateRequest({ commit }) {
@@ -74,6 +79,10 @@ const mutations = {
     ALLOCATE_MEMORY (state, variable) {
         state.isApplied++;
         state.memory.request.push(variable);
+    },
+    //
+    MODIFY_MEMORY (state, variable) {
+        state.memory.variable = variable;
     },
     //
     RESOLVE_ALLOCATE_REQUEST (state) {

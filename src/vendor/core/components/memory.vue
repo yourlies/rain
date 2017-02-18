@@ -7,13 +7,13 @@ import { mapGetters } from 'vuex';
 export default {
     data () {
         return {
-            memory: { schedule: [], param: {}, stack: {}, heap: {} }
+            memory: { schedule: [], variable: {} }
         }
     },
     computed: {
         ...mapGetters({
             isAllocated: 'getAllocateListener',
-            request: 'getAllocateRequest'
+            request: 'getAllocateRequest',
         })
     },
     methods: {
@@ -23,45 +23,22 @@ export default {
         resolveMallocRequest () {
             this.$store.dispatch('resolveAllocateRequest');
         },
-        newStack () {
-            //
-        },
-        newHeap () {
-            //
-        },
-        stackTreatment (schedule) {
-            switch (schedule.operate) {
-                case 'new':
-                    this.memory.stack[schedule.variableName] = [];
-                    break;
-                case 'push':
-                    this.memory.stack[schedule.variableName].push(schedule.variableValue);
-                    break;
-                case 'pop':
-                    this.memory.stack[schedule.variableName].pop();
-                    break;
-                default:
-                    break;
-            }
-        }
     },
     watch: {
         isAllocated: function () {
             this.memory.schedule = this.memory.schedule.concat(this.request);
             this.resolveMallocRequest();
             for (let i = 0; i < this.memory.schedule.length; i++) {
-                if (this.memory.schedule[i]['type'] == 'stack') {
-                    this.stackTreatment(this.memory.schedule[i]);
+                for (let [key, value] of Object.entries(this.memory.schedule[i])) {
+                    this.memory.variable[key] = value;
                 }
+                this.$store.dispatch('reportData', { memory: this.memory });
             }
-            console.log(this.memory.stack.history);
+            this.$store.dispatch('modifyMemory', this.memory.variable);
         }
     },
     mounted () {
-        this.allocateMemory({ variableName: 'history', type: 'stack', operate: 'new' });
-        this.allocateMemory({ variableName: 'history', variableValue: '/wiki', type: 'stack', operate: 'push' });
-        this.allocateMemory({ variableName: 'history', variableValue: '/', type: 'stack', operate: 'push' });
-        this.allocateMemory({ variableName: 'history', type: 'stack', operate: 'pop'});
+        this.$store.dispatch('allocateMemory', { xx: 11 });
     }
 }
 </script>

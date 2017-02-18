@@ -2,15 +2,12 @@
 <div>
 <div class="rain-control">
     <div class="tool">
-        <a class="actived">delegation</a>
+        <a class="actived">memory</a>
         <a>hook</a>
     </div>
     <div class="data">
-        <div>unresolved: {{ xx.delegation.unresolved }}</div>
-        <div>resolved: {{ xx.delegation.resolved }}</div>
-        <div>current: {{ xx.delegation.current }}</div>
-        <div>workload: {{ xx.delegation.workload }}</div>
-        <div>subscribers: {{ xx.delegation.subscribers }}</div>
+        <div>schedule: {{ xx.memory.schedule }}</div>
+        <div>variable: {{ xx.memory.variable }}</div>
     </div>
 </div>
 </div>
@@ -23,7 +20,7 @@ import plugin from '../../autoload/plugin';
 export default {
     data () {
         return {
-            xx: {delegation: {}}
+            xx: {memory: {}}
         }
     },
     computed: {
@@ -47,8 +44,8 @@ export default {
     font-size: 15px;
     width: 240px;
     padding: 10px 13px;
-    bottom: 0;
-    right: 0;
+    bottom: 3px;
+    right: 3px;
 }
 .rain-control .tool a {
     margin-right: 5px;

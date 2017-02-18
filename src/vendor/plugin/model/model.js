@@ -1,6 +1,5 @@
 //加载依赖模块
 import modelConfig from '../../../config/model';
-console.log(modelConfig)
 /*
  * @description: load加载类，加载博客模型类
  * @author: Changle
