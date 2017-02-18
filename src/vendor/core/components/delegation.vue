@@ -8,18 +8,13 @@ const subscribers = plugin.model;
 const delegation = {
     data () {
         return {
-            subscriptions: { unresolved: [], resolved: [], current: {} },
+            subscriptions: { unresolved: [], resolved: [], current: {}, workload: 0 },
         }
-    },
-    mounted () {
-        this.$store.dispatch('reportData', '白痴');
-        console.log(this.test)
     },
     computed: {
         ...mapGetters({
             unresolvedSubscriptions: 'getDelegationSubscriptions',
             isBubbled: 'getDelegationListener',
-            test: 'getMonitoringData'
         })
     },
     methods: {
@@ -52,6 +47,7 @@ const delegation = {
                 const subscription = this.subscriptions.unresolved.shift();
                 this.call(subscription.subscription, subscription.page, subscription.id);
                 this.subscriptions.resolved.push(subscription);
+                this.subscriptions.workload++;
             }
         },
         call (subscription, page, id) {
@@ -68,11 +64,15 @@ const delegation = {
             for (let i = 0; i < this.unresolvedSubscriptions.length; i++) {
                 this.subscriptions.current[`subscription${this.unresolvedSubscriptions[i]['id']}`] = subscribers.subscription(this.unresolvedSubscriptions[i]['subscription']);
                 this.subscriptions.length++;
+                this.subscriptions.workload++;
             }
         },
         isBubbled: function () {
             this.handle();
         },
+        'subscriptions.workload': function () {
+            this.$store.dispatch('reportData', { delegation: this.subscriptions })
+        }
     },
 }
 

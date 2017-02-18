@@ -1,7 +1,7 @@
 // state
 const state = {
     //
-    monitoringData: []
+    monitoringData: {}
 }
 // getters
 const getters = {
@@ -17,7 +17,7 @@ const actions = {
 const mutations = {
     // 触发钩子事件
     REPORT_DATA (state, data) {
-        state.monitoringData.push(data);
+        Object.assign(state.monitoringData, data);
     },
 }
 
