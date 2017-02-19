@@ -54,7 +54,7 @@ const actions = {
 // mutations
 const mutations = {
     // 触发钩子事件
-    TRIGGER_HOOK (state, { subscription }) {
+    TRIGGER_HOOK (state, subscription) {
         state.isTriggered++;
         state.hook.subscriptions.push(subscription);
     },

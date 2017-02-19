@@ -1,7 +1,10 @@
 <template></template>
 <script>
 import Func from '../../lib';
+import dependency from '../../autoload/dependency';
 import { mapGetters } from 'vuex';
+
+const plugin = dependency.plugin;
 
 export default {
     data () {
@@ -33,11 +36,8 @@ export default {
             this.$store.dispatch('triggerHook', subscription);
         },
         call (method) {
-            // hooks.trigger(method);
+            plugin.trigger(method);
         },
-    },
-    mounted () {
-        this.trigger('heiheihei');
     },
     watch: {
         isTriggered: function () {
