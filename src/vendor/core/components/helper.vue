@@ -15,7 +15,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import Func from '../../lib';
-import plugin from '../../autoload/plugin';
+import dependency from '../../autoload/dependency';
 
 export default {
     data () {

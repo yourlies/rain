@@ -2,7 +2,7 @@
 import model from './model';
 // 配置插件参数
 const options = {
-    vendorModulePlugin: {
+    vendorModuleDependency: {
         model
     }
 }

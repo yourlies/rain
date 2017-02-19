@@ -1,7 +1,7 @@
 <template></template>
 <script>
 import Func from '../../lib';
-import plugin from '../../autoload/plugin';
+import dependency from '../../autoload/dependency';
 import { mapGetters } from 'vuex';
 
 export default {

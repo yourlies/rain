@@ -1,14 +1,18 @@
 <template></template>
 <script>
 import Func from '../../lib';
+import dependency from '../../autoload/dependency';
 import { mapGetters } from 'vuex';
-import plugin from '../../autoload/plugin';
-const subscribers = plugin.model;
 
+const models = dependency.model;
 const delegation = {
     data () {
         return {
-            subscriptions: { unresolved: [], resolved: [], current: {}, workload: 0, subscribers: subscribers.config },
+            subscriptions: {
+                unresolved: [], resolved: [], workload: 0,
+                current: {}, currentCount: 0,
+                subscribers: models.config
+            },
         }
     },
     computed: {
@@ -18,26 +22,26 @@ const delegation = {
         })
     },
     methods: {
-        trigger (subscription) {
-            this.$store.dispatch('triggerHook', subscription, this);
-        },
-        resolved (id) {
+        resolve (id) {
             if (
                 this.subscriptions.current.hasOwnProperty(`subscription${id.subscription}`)
                 && this.subscriptions.current[`subscription${id.subscription}`].hasOwnProperty(`subscriber${id.subscriber}`)
             ) {
                 this.subscriptions.current[`subscription${id.subscription}`][`subscriber${id.subscriber}`] = true;
-                this.subscriptions.length--;
+                this.subscriptions.currentCount--;
             }
-            if (this.subscriptions.length <= 0) {
+            if (this.subscriptions.currentCount <= 0) {
                 this.trigger('loadingstop');
             }
         },
-        resolveSubscriptions () {
-            this.$store.dispatch('resolveDelegationSubscriptions');
+        trigger (subscription) {
+            this.$store.dispatch('triggerHook', subscription, this);
         },
         bubble (subscription, page, component, id) {
-            subscribers.bubble(subscription, page, component, id);
+            models.bubble(subscription, page, component, id);
+        },
+        resolveSubscriptions () {
+            this.$store.dispatch('resolveDelegationSubscriptions');
         },
         handle () {
             this.subscriptions.unresolved = this.subscriptions.unresolved.concat(this.unresolvedSubscriptions);
@@ -56,14 +60,12 @@ const delegation = {
     },
     watch: {
         '$route.path': function () {
-            if (this.unresolvedSubscriptions.length != 0) {
+            if (this.unresolvedSubscriptions.length > 0) {
                 this.trigger('loadingstart');
             }
-            this.subscriptions.current = [];
-            this.subscriptions.length = 0;
             for (let i = 0; i < this.unresolvedSubscriptions.length; i++) {
-                this.subscriptions.current[`subscription${this.unresolvedSubscriptions[i]['id']}`] = subscribers.subscription(this.unresolvedSubscriptions[i]['subscription']);
-                this.subscriptions.length++;
+                this.subscriptions.current[`subscription${this.unresolvedSubscriptions[i]['id']}`] = models.subscription(this.unresolvedSubscriptions[i]['subscription']);
+                this.subscriptions.currentCount++;
                 this.subscriptions.workload++;
             }
         },
