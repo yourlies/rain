@@ -2,8 +2,8 @@
 import modelConfig from '../../../config/model';
 /*
  * @description: load加载类，加载博客模型类
- * @author: Changle
- * @update: Changle (2016-10-21 15:32)
+ * @author: 因雨而生
+ * @update: 因雨而生 (2016-10-21 15:32)
  */
 class Model {
     constructor () {

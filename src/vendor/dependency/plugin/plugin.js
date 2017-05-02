@@ -1,6 +1,6 @@
-//加载依赖模块    
+// 加载依赖模块    
 import pluginConfig from '../../../config/plugin';
-
+// 插件程序加载类
 class Plugin {
     constructor () {
         this.plugins = {};
