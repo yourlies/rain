@@ -45,8 +45,15 @@ class Route {
     loadVendorRouterViews () {
         for (let [key, value] of Object.entries(this.vendorRouterConfig.routes)) {
             const dir = Php.explode('/', value);
-            const view = require('../' + value);
-            Func.storeClassification(this.appRoutesViews, dir, view);
+            // 只要用户部分设置了路由，根目录路由即不加载
+            if (key == '/' && !Func.isEmptyObject(this.userRouterConfig.routes)) {
+                continue;
+            }
+            // 如果用户部分重写了路由，不再加载框架内部该路由的页面
+            if (!this.userRouterConfig.routes.hasOwnProperty(key)) {
+                const view = require('../' + value);
+                Func.storeClassification(this.appRoutesViews, dir, view);
+            }
         }
     }
     // 加载程序路由页面
@@ -79,6 +86,10 @@ class Route {
             }
             if (value.charAt(0) == '/') {
                 value = value.match(/^\/{1,}(.*)/)[1];
+            }
+            // 如果设置了用户部分路由而没有设置用户根目录路由，则不加载入程序路由配置
+            if (key == '/' && !this.userRouterConfig.routes.hasOwnProperty('/')) {
+                continue;
             }
             const dir = Php.explode('/', value);
             this.appRoutes.push({ path: key, component: Func.readClassification(this.appRoutesViews, dir) });

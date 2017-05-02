@@ -67,10 +67,18 @@ const readUserInfo = function () {
     return userInfo;
 }
 
+const isEmptyObject = function (object) {
+    for (let name in object) {
+        return false;
+    }
+    return true;
+}
+
 export default {
     formatTime: formatTime,
     parseMarkdown: parseMarkdown,
     storeClassification: storeClassification,
     readClassification: readClassification,
     readUserInfo: readUserInfo,
+    isEmptyObject: isEmptyObject,
 }
