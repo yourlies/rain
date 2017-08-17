@@ -5,7 +5,9 @@ const state = {
     // 定义代理事件数据
     isBubbled: 0, delegation: { subscriptions: [] },
     // 
-    isApplied: 0, memory: { request: [], variable: [] }
+    isApplied: 0, memory: { request: [], variable: [] },
+    // 
+    isRegister: 0, isRequest: 0, customer: { register: [], request: [] },
 }
 // getters
 const getters = {
@@ -18,7 +20,12 @@ const getters = {
     // 
     getAllocateListener: state => state.isApplied,
     getAllocateRequest: state => state.memory.request,
-    getAllocateVariable: state => state.memory.variable
+    getAllocateVariable: state => state.memory.variable,
+    // 
+    getCustomerRequestListener: state => state.isRequest,
+    getCustomerRegisterListener: state => state.isRegister,
+    getCustomerRequest: state => state.customer.request,
+    getCustomerRegister: state => state.customer.register,
 }
 // actions
 const actions = {
@@ -31,12 +38,28 @@ const actions = {
         commit('RESOLVE_HOOK_SUBSCRIPTIONS');
     },
     // 冒泡代理事件
-    bubbleDelegation ({ commit }, subscription, input) {
-        commit('BUBBLE_DELEGATION', subscription, input);
+    bubbleDelegation ({ commit }, { subscription, page }) {
+        commit('BUBBLE_DELEGATION', { subscription, page });
     },
     // 清除代理事件
     resolveDelegationSubscriptions ({ commit }) {
         commit('RESOLVE_DELEGATION_SUBSCRIPTIONS');
+    },
+    // 冒泡用户组件事件
+    requestCustomer ({ commit }, { request, payload, page }) {
+        commit('REQUEST_CUSTOMER', { request, payload, page });
+    },
+    // 注册用户组件事件
+    registerCustomer ({ commit }, { register, page }) {
+        commit('REGISTER_CUSTOMER', { register, page });
+    },
+    // 清除用户组件事件
+    resolveCustomerRegister ({ commit }) {
+        commit('RESOLVE_CUSTOMER_REGISTER');
+    },
+    // 清除用户组件事件
+    resolveCustomerRequest ({ commit }) {
+        commit('RESOLVE_CUSTOMER_REQUEST');
     },
     // 
     allocateMemory ({ commit }, variable) {
@@ -63,7 +86,7 @@ const mutations = {
         state.hook.subscriptions = [];
     },
     // 冒泡代理事件
-    BUBBLE_DELEGATION (state, subscription, page) {
+    BUBBLE_DELEGATION (state, { subscription, page }) {
         state.isBubbled++;
         state.delegation.subscriptions.push({
             id: state.isBubbled,
@@ -74,6 +97,23 @@ const mutations = {
     // 清除代理事件
     RESOLVE_DELEGATION_SUBSCRIPTIONS (state) {
         state.delegation.subscriptions = [];
+    },
+    // 冒泡用户组件事件
+    REQUEST_CUSTOMER (state, { request, payload, page }) {
+        state.isRequest++;
+        state.customer.request.push({ request, payload, page });
+    },
+    REGISTER_CUSTOMER (state, { register, page }) {
+        state.isRegister++;
+        state.customer.register.push({ register, page });
+    },
+    // 清除用户组件事件
+    RESOLVE_CUSTOMER_REQUEST ({ commit }) {
+        state.customer.request = [];
+    },
+    // 清除用户组件事件
+    RESOLVE_CUSTOMER_REGISTER ({ commit }) {
+        state.customer.register = [];
     },
     //
     ALLOCATE_MEMORY (state, variable) {

@@ -29,7 +29,7 @@ class Model {
     addSubscription () {
         for (let subscription in this.config.subscriptions) {
             for (let model in this.config.subscriptions[subscription]) {
-                const method = this.config.subscriptions[subscription][model];    
+                const method = this.config.subscriptions[subscription][model];
                 const callback = this.subscriber[model][method];
                 if (!this.subscription.hasOwnProperty(subscription)) {
                     this.subscription[subscription] = [];
