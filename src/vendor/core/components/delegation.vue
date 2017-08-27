@@ -50,6 +50,8 @@ const delegation = {
             for (let i = 0; i < length; i++) {
                 const subscription = this.subscriptions.unresolved.shift();
                 this.call(subscription.subscription, subscription.page, subscription.id);
+                console.log('%cEvent bubble:', 'font-weight: bold;', subscription.subscription)
+                console.log('%cpayload:', 'color: #06ab9a;', subscription)
                 this.subscriptions.resolved.push(subscription);
                 this.subscriptions.workload++;
             }

@@ -8,7 +8,7 @@ Vue.use(VueRouter);
 import routes from './router';
 // 初始化vue-router数据
 const routerOptions = {
-    mode: 'history',
+    mode: 'hash',
     base: __dirname,
     routes
 }
