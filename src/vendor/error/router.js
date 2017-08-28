@@ -67,10 +67,6 @@ class Route {
                 value = value.match(/^\/{1,}(.*)/)[1];
             }
             const dir = Php.explode('/', value);
-            // 如果用户没有补完.vue后缀，自动补全
-            if (!value.match('.vue')) {
-                value = `${value}.vue`;
-            }
             const view = require('../../views/' + value);
             Func.storeClassification(this.appRoutesViews, dir, view);
         }
@@ -95,10 +91,12 @@ class Route {
             if (value.charAt(0) == '/') {
                 value = value.match(/^\/{1,}(.*)/)[1];
             }
+            // 如果设置了用户部分路由而没有设置用户根目录路由，则不加载入程序路由配置
+            if (key == '/' && !this.userRouterConfig.routes.hasOwnProperty('/')) {
+                continue;
+            }
             const dir = Php.explode('/', value);
-            this.appRoutes.push({
-              path: key, component: Func.readClassification(this.appRoutesViews, dir)
-            });
+            this.appRoutes.push({ path: key, component: Func.readClassification(this.appRoutesViews, dir) });
         }
     }
 }

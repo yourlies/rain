@@ -1,6 +1,7 @@
 export default {
     routes: {
-        // '/': 'wiki/components/welcome',
-        // '/wiki': 'wiki/components/wiki'
+        '/': 'wiki/views/welcome',
+        // '/vendor/welcome': 'wiki/views/welcome',
+        // '/vendor/wiki': 'wiki/views/wiki',
     }
 };

@@ -51,7 +51,7 @@ const parseMarkdown = function (md, config) {
 }
 
 const formatTime = function (time) {
-    return moment.unix(time).format('MM 月 DD 日 YYYY 年');
+    return moment.unix(time).format('YYYY年MM月DD日');
 }
 
 const readUserInfo = function () {
@@ -74,11 +74,51 @@ const isEmptyObject = function (object) {
     return true;
 }
 
+const toUrl = function (url, params) {
+    let paramsArr = [];
+    if (params) {
+        Object.keys(params).forEach(item => {
+            paramsArr.push(item + '=' + params[item]);
+        })
+        url.search(/\?/) === -1
+            ? url += '?' + paramsArr.join('&')
+            : url += '&' + paramsArr.join('&');
+    }
+    return url;
+}
+
+const bodyParse = function (req) {
+    const res = {};
+    let chips = [];
+    chips = req.split('?');
+    res.url = chips[0];
+    res.params = chips[1] && chips[1].split('&');
+    return res;
+}
+
+const bodyPack = function (data) {
+    const req = {};
+    let body = [];
+    for (let [key, value] of Object.entries(data.params)) {
+        body.push(key + '=' + value);
+    }
+    req.body = body.join('&');
+    switch (data.type) {
+        case 'get':
+            req.query = `${data.url}?${req.body}`;
+            break;
+    }
+    return req;
+}
+
 export default {
-    formatTime: formatTime,
-    parseMarkdown: parseMarkdown,
-    storeClassification: storeClassification,
-    readClassification: readClassification,
-    readUserInfo: readUserInfo,
-    isEmptyObject: isEmptyObject,
+    bodyPack,
+    formatTime,
+    bodyParse,
+    parseMarkdown,
+    storeClassification,
+    readClassification,
+    readUserInfo,
+    isEmptyObject,
+    toUrl
 }
