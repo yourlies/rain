@@ -50,8 +50,8 @@ const parseMarkdown = function (md, config) {
     return marked(md);
 }
 
-const formatTime = function (time) {
-    return moment.unix(time).format('YYYY年MM月DD日');
+const formatTime = function (time, format) {
+    return moment.unix(time).format(format);
 }
 
 const readUserInfo = function () {
@@ -111,6 +111,32 @@ const bodyPack = function (data) {
     return req;
 }
 
+const number = function (number) {
+    if (typeof number == 'object') {
+        const res = [];
+        for (let i = 0; i < number.length; i++) {
+            res.push(number[i] - 0);
+        }
+        return res;
+    }
+    return number - 0;
+}
+
+const parseUrl = function (url) {
+    const query = url.match(/\?((.*?)#)/);
+    if (!query) {
+        return {};
+    }
+    const params = query[2].split('&');
+    const res = {};
+    let param;
+    for (let i = 0; i < params.length; i++) {
+        param = params[i].match(/(.*?=)(.*)/);
+        res[param[1].replace('=', '')] = param[2];
+    }
+    return res;
+}
+
 export default {
     bodyPack,
     formatTime,
@@ -119,6 +145,8 @@ export default {
     storeClassification,
     readClassification,
     readUserInfo,
+    parseUrl,
     isEmptyObject,
-    toUrl
+    toUrl,
+    number
 }

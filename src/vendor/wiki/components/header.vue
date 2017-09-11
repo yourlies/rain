@@ -10,7 +10,7 @@
     </div>
   </div>
 </template>
-<style>
+<style scoped>
   .dfcenter {
     display: flex;
     align-items: center;

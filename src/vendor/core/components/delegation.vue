@@ -13,11 +13,13 @@ const delegation = {
                 current: {}, currentCount: 0,
                 subscribers: models.config
             },
+            emit: { payload: {} },
         }
     },
     computed: {
         ...mapGetters({
             unresolvedSubscriptions: 'getDelegationSubscriptions',
+            memory: 'getAllocateVariable',
             isBubbled: 'getDelegationListener',
         })
     },
@@ -33,6 +35,7 @@ const delegation = {
             if (this.subscriptions.currentCount <= 0) {
                 this.trigger('loadingstop');
             }
+            this.modify({ [id.name]: this.memory[id.name] + 1 });
         },
         trigger (subscription) {
             this.$store.dispatch('triggerHook', subscription, this);
@@ -40,8 +43,17 @@ const delegation = {
         bubble (subscription, page, component, id) {
             models.bubble(subscription, page, component, id);
         },
+        request (subscription, payload) {
+            this.$store.dispatch('requestCustomer', { request: subscription, payload, page: this });
+        },
         resolveSubscriptions () {
             this.$store.dispatch('resolveDelegationSubscriptions');
+        },
+        allocate (payload) {
+            this.$store.dispatch('allocateMemory', payload);
+        },
+        modify (payload) {
+            this.$store.dispatch('modifyMemory', payload);
         },
         handle () {
             this.subscriptions.unresolved = this.subscriptions.unresolved.concat(this.unresolvedSubscriptions);
@@ -57,6 +69,7 @@ const delegation = {
             }
         },
         call (subscription, page, id) {
+            this.modify({ [subscription]: this.memory[subscription] || 0 });
             this.bubble(subscription, page, this, id);
         },
     },
