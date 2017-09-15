@@ -54,6 +54,7 @@ class Model {
             if (this.subscription.hasOwnProperty(subscription)) {
                 for (let i = 0; i < this.subscription[subscription].length; i++) {
                     const eventId = {};
+                    eventId.name = subscription;
                     eventId.subscription = id;
                     eventId.subscriber = i;
                     eventId.name = subscription;

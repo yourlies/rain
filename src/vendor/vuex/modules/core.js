@@ -5,7 +5,7 @@ const state = {
     // 定义代理事件数据
     isBubbled: 0, delegation: { subscriptions: [] },
     // 
-    isApplied: 0, memory: { request: [], variable: [] },
+    isApplied: 0, memory: { request: [], variable: {} },
     // 
     isRegister: 0, isRequest: 0, customer: { register: [], request: [] },
 }
@@ -123,7 +123,7 @@ const mutations = {
     },
     //
     MODIFY_MEMORY (state, variable) {
-        state.memory.variable = variable;
+        state.memory.variable = { ...state.memory.variable, ...variable };
     },
     //
     RESOLVE_ALLOCATE_REQUEST (state) {

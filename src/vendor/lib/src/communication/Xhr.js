@@ -1,3 +1,9 @@
+import Promise from 'promise-polyfill';
+import 'whatwg-fetch';
+if (!window.Promise) {
+  window.Promise = Promise;
+}
+
 class Xhr {
     static fetch (url, options) {
         return fetch(url, options)

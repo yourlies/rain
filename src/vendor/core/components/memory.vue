@@ -37,8 +37,5 @@ export default {
             this.$store.dispatch('modifyMemory', this.memory.variable);
         }
     },
-    mounted () {
-        this.$store.dispatch('allocateMemory', { xx: 11 });
-    }
 }
 </script>
