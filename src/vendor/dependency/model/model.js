@@ -9,7 +9,9 @@ class Model {
     constructor () {
         ::this.loadModels; ::this.addSubscription; ::this.addBubbles;
         this.initialize();
-        this.loadModels(); this.addSubscription(); this.addBubbles();
+        this.loadModels();
+        this.addSubscription();
+        this.addBubbles();
     }
 
     initialize () {

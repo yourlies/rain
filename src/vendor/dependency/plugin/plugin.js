@@ -16,7 +16,7 @@ class Plugin {
         for (let i = 0; i < this.subscriber.length; i++) {
             const subscriber = this.subscriber[i];
             try {
-                this.plugins[subscriber] = require('../../../plugin/' + subscriber + '/hook');
+                this.plugins[subscriber] = require(`../../../plugin/${subscriber}/hook`);
             } catch (error) {
             console.warn('failed to require the plugin ' + subscriber + ', please check the plugin is conforms with the regulations');
             }

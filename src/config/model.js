@@ -1,14 +1,6 @@
 export default {
-    models: ['Welcome'],
+    models: [],
     subscriptions: {
-        'say': {
-            Welcome: 'say',
-        },
-        'girlfriend': {
-            Welcome: 'girlfriend',
-        },
-        'seemovie': {
-            Welcome: 'seemovie',
-        }
+        // 
     }
 }
