@@ -1,5 +1,5 @@
 export default {
   routes: {
-    // 
+    '/': 'test',
   }
 }

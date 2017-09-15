@@ -2,7 +2,7 @@
  * modify: <因雨而生 958142428@qq.com 2017-05-02>
  */
 
-import { Php, Func } from '../lib';
+import { Php, Func, Core } from '../lib';
 import userRouterConfig from '../../config/router';
 import vendorRouterConfig from '../config/router';
 
@@ -56,7 +56,7 @@ class Route {
             // 如果用户部分重写了路由，不再加载框架内部该路由的页面
             if (!this.userRouterConfig.routes.hasOwnProperty(key)) {
                 const view = require('../' + value);
-                Func.storeClassification(this.appRoutesViews, dir, view);
+                Core.storeClassification(this.appRoutesViews, dir, view);
             }
         }
     }
@@ -72,7 +72,7 @@ class Route {
                 value = `${value}.vue`;
             }
             const view = require('../../views/' + value);
-            Func.storeClassification(this.appRoutesViews, dir, view);
+            Core.storeClassification(this.appRoutesViews, dir, view);
         }
     }
     // 加载程序路由
@@ -97,7 +97,7 @@ class Route {
             }
             const dir = Php.explode('/', value);
             this.appRoutes.push({
-              path: key, component: Func.readClassification(this.appRoutesViews, dir)
+              path: key, component: Core.readClassification(this.appRoutesViews, dir)
             });
         }
     }
