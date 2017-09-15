@@ -1,14 +1,15 @@
 // load profile and get module configuration
 import vendorLoadedConfig from '../config/load';
 const vendorModuleConfig = vendorLoadedConfig.module;
-// define module and components container
+// define module container
 const vendorModule = [];
-const components = [];
 // load module
 for (let [key, value] of Object.entries(vendorModuleConfig)) {
   const module = require('../' + value + '/load');
   vendorModule.push(module.default);
 }
+// define components container
+const components = [];
 // load module's necessary components
 vendorModule.map((vendorModule) => {
   // module must has property appSetting and components configuration in it
@@ -33,7 +34,7 @@ const loadComponents = function (Vue, components) {
     }
   });
 }
-// provieded an api to configure
+// provieded an api to set configuration
 const componentSetting = (Vue) => {
   loadComponents(Vue, components);
 }
