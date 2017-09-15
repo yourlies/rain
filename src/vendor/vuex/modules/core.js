@@ -38,8 +38,8 @@ const actions = {
         commit('RESOLVE_HOOK_SUBSCRIPTIONS');
     },
     // 冒泡代理事件
-    bubbleDelegation ({ commit }, { subscription, page }) {
-        commit('BUBBLE_DELEGATION', { subscription, page });
+    bubbleDelegation ({ commit }, { subscription, page, rely }) {
+        commit('BUBBLE_DELEGATION', { subscription, page, rely });
     },
     // 清除代理事件
     resolveDelegationSubscriptions ({ commit }) {
@@ -86,12 +86,13 @@ const mutations = {
         state.hook.subscriptions = [];
     },
     // 冒泡代理事件
-    BUBBLE_DELEGATION (state, { subscription, page }) {
+    BUBBLE_DELEGATION (state, { subscription, page, rely }) {
         state.isBubbled++;
         state.delegation.subscriptions.push({
             id: state.isBubbled,
-            subscription: subscription,
-            page: page,
+            subscription,
+            page,
+            rely
         });
     },
     // 清除代理事件

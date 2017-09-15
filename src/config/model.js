@@ -4,5 +4,11 @@ export default {
         'say': {
             Welcome: 'say',
         },
+        'girlfriend': {
+            Welcome: 'girlfriend',
+        },
+        'seemovie': {
+            Welcome: 'seemovie',
+        }
     }
 }

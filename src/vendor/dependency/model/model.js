@@ -56,6 +56,7 @@ class Model {
                     const eventId = {};
                     eventId.subscription = id;
                     eventId.subscriber = i;
+                    eventId.name = subscription;
                     this.subscription[subscription][i](page, component, eventId);
                 }
             }

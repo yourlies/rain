@@ -11,6 +11,14 @@
   export default {
     components: {
       banner
+    },
+    methods: {
+      bubble (subscription, payload = {}) {
+        this.$store.dispatch('bubbleDelegation', { subscription, page: this, rely: payload.rely });
+      },
+    },
+    mounted () {
+      // 
     }
   }
 </script>
