@@ -167,6 +167,11 @@ const delegation = {
             this.$store.dispatch('reportData', { delegation: this.subscriptions })
         }
     },
+    mounted () {
+      self.$bubble = (subscription, payload) => {
+        this.$bubble(subscription, payload)
+      }
+    }
 }
 
 export default delegation;

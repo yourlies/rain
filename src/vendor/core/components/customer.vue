@@ -6,7 +6,9 @@ import { mapGetters } from 'vuex';
 export default {
   data () {
     return {
-      customer: { request: [], register: {} }
+      customer: { request: [], register: {} },
+      async: [],
+      pool: {},
     }
   },
   methods: {
@@ -30,9 +32,11 @@ export default {
         this.$nextTick(() => {
           this.customer.request = [...this.unresolvedRequest, ...this.customer.request];
           for (let i = 0; i < this.unresolvedRequest.length; i++) {
-            if (this.customer.register.hasOwnProperty(this.unresolvedRequest[i].request)) {
-              this.customer.register[this.unresolvedRequest[i].request].count++;
-              this.customer.register[this.unresolvedRequest[i].request].payload = this.unresolvedRequest[i].payload;
+            const { request, payload } = this.unresolvedRequest[i];
+            if (this.customer.register.hasOwnProperty(request)) {
+              this.pool[request](payload);
+            } else {
+              this.async.push(this.unresolvedRequest[i]);
             }
           }
           this.resolveRequest();
@@ -40,13 +44,35 @@ export default {
       },
       isRegister: function () {
         for (let i = 0; i < this.unresolvedRegister.length; i++) {
-          this.customer.register[this.unresolvedRegister[i].register] = this.unresolvedRegister[i].page;
+          const { register, page } = this.unresolvedRegister[i];
+          this.customer.register[register] = page;
+          this.pool[register] = page.$pool[register];
         }
         this.resolveRegister();
+        for (let i = 0; i < this.async.length; i++) {
+          const { request, payload } = this.async[i];
+          if (this.customer.register.hasOwnProperty(request)) {
+            this.pool[request](payload);
+            this.async.splice(i, 1);
+            i--;
+          }
+        }
+
       }
     },
     mounted () {
-      // 
+      self.$request = (subscription, payload) => {
+        this.$request(subscription, payload)
+      }
+      self.$register = (subscription, payload) => {
+        return this.$register(subscription, payload);
+      }
+      self.$components = self.$components || {};
+      self.$components.customer = {};
+      self.$components.customer.log = {
+        request: this.customer.request,
+        register: this.customer.register,
+      }
     }
 }
 </script>

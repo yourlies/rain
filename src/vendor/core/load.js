@@ -6,6 +6,8 @@ import hook from './components/hook';
 import memory from './components/memory';
 // 
 import customer from './components/customer';
+// 
+import communication from './components/communication';
 
 // 框架调试组件
 // import helper from './components/helper';
@@ -13,7 +15,7 @@ import customer from './components/customer';
 export default {
     appSetting: {
         components: {
-            delegation, hook, memory, customer
+            delegation, hook, memory, customer, communication
             // helper
         }
     }

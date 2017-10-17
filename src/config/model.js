@@ -1,6 +1,8 @@
 export default {
-    models: [],
-    subscriptions: {
-        // 
+  models: ['Welcome'],
+  subscriptions: {
+    sayhello: {
+      Welcome: 'hello',
     }
+  }
 }

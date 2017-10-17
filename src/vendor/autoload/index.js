@@ -2,9 +2,11 @@ import { Php, Func } from '../lib';
 import App from '../../App';
 import { componentSetting } from './component';
 import { moduleOptions } from './module';
+import { registerSetting } from './register';
 
 const appSetting = (Vue) => {
     componentSetting(Vue);
+    registerSetting(Vue);
 };
 const appOptions = {};
 // 设置程序文档结点

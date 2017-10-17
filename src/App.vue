@@ -1,6 +1,7 @@
 <template>
   <div id="app">
-    <router-view></router-view>
+    <div class="vendor-components"></div>
     <vendor-components class="core"></vendor-components>
+    <router-view></router-view>
   </div>
 </template>
