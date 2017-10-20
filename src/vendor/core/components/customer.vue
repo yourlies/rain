@@ -33,10 +33,18 @@ export default {
           this.customer.request = [...this.unresolvedRequest, ...this.customer.request];
           for (let i = 0; i < this.unresolvedRequest.length; i++) {
             const { request, payload } = this.unresolvedRequest[i];
-            if (this.customer.register.hasOwnProperty(request)) {
-              this.pool[request](payload);
-            } else {
-              this.async.push(this.unresolvedRequest[i]);
+            switch (typeof this.customer.register[request]) {
+              case 'undefined':
+                this.async.push(this.unresolvedRequest[i]);
+                break;
+              case 'function':
+                this.pool[request](payload);
+                break;
+              case 'object':
+                for (let j = 0; j < this.pool[request].length; j++) {
+                  this.pool[request][j](payload);
+                }
+                break;
             }
           }
           this.resolveRequest();
@@ -46,7 +54,17 @@ export default {
         for (let i = 0; i < this.unresolvedRegister.length; i++) {
           const { register, page } = this.unresolvedRegister[i];
           this.customer.register[register] = page;
-          this.pool[register] = page.$pool[register];
+          switch (typeof this.pool[register]) {
+            case 'undefined':
+              this.pool[register] = page.$pool[register];
+              break;
+            case 'function':
+              this.pool[register] = [page.$pool[register], this.pool[register]];
+              break;
+            case 'object':
+              this.pool[register].push(page.$pool[register]);
+              break;
+          }
         }
         this.resolveRegister();
         for (let i = 0; i < this.async.length; i++) {
@@ -72,6 +90,7 @@ export default {
       self.$components.customer.log = {
         request: this.customer.request,
         register: this.customer.register,
+        subscribers: this.pool,
       }
     }
 }

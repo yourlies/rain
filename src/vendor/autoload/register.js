@@ -4,6 +4,10 @@ register.install = function (Vue, options) {
   Vue.prototype.$bubble = function (subscription, payload = {}) {
     this.$store.dispatch('bubbleDelegation', { subscription, page: this, ...payload });
   }
+  // event subscriber for component
+  Vue.prototype.$model = function (subscription, payload = {}) {
+    this.$store.dispatch('modelDelegation', { subscription, page: this, ...payload });
+  }
   // customer register event function
   Vue.prototype.$register = function (subscription, payload = {}) {
     this.$store.dispatch('registerCustomer', { register: subscription, page: this, ...payload });
@@ -23,6 +27,12 @@ register.install = function (Vue, options) {
   // customer aollocate variable
   Vue.prototype.$allocate = function (payload = {}) {
     this.$store.dispatch('allocateMemory', payload);
+  }
+  // customer extend a component
+  Vue.prototype.$extend = function (componentOptions) {
+    return componentOptions;
+    // const component = Vue.extend(componentOptions);
+    // return new component();
   }
 }
 

@@ -53,6 +53,17 @@ class Model {
 
     addBubbles () {
         const bubble = (subscription, page, component, id) => {
+            // if (component.failed.length == 0) {
+            //     component.failed.push({ subscription, page, component, id, handle: false });
+            // }
+            // for (let i = 0; i < component.failed.length; i++) {
+            //     if (component.failed[i].id == id) {
+            //         break;
+            //     }
+            //     if (i == component.failed.length - 1) {
+            //         component.failed.push({ subscription, page, component, id, handle: false });
+            //     }
+            // }
             if (this.subscription.hasOwnProperty(subscription)) {
                 for (let i = 0; i < this.subscription[subscription].length; i++) {
                     const eventId = {};
@@ -62,6 +73,12 @@ class Model {
                     eventId.name = subscription;
                     this.subscription[subscription][i](page, component, eventId);
                 }
+                // for (let j = 0; j < component.failed.length; j++) {
+                //     if (component.failed[j].subscription == subscription
+                //         && id == component.failed[j].id) {
+                //         component.failed[j].handle = true;
+                //     }
+                // }
             }
         };
         this.delegation.bubble = bubble;
