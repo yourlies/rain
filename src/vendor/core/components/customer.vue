@@ -33,7 +33,7 @@ export default {
           this.customer.request = [...this.unresolvedRequest, ...this.customer.request];
           for (let i = 0; i < this.unresolvedRequest.length; i++) {
             const { request, payload } = this.unresolvedRequest[i];
-            switch (typeof this.customer.register[request]) {
+            switch (typeof this.pool[request]) {
               case 'undefined':
                 this.async.push(this.unresolvedRequest[i]);
                 break;
