@@ -12,9 +12,7 @@
       this.$register('qwe').then(() => {
         console.log(1)
       })
-      for (let i = 0; i < 1000; i++) {
-        this.$bubble('asd')
-      }
+      this.$bubble('asd')
     }
   }
 </script>
