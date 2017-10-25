@@ -66,30 +66,6 @@ const toUrl = function (url, params) {
     return url;
 }
 
-const bodyParse = function (req) {
-    const res = {};
-    let chips = [];
-    chips = req.split('?');
-    res.url = chips[0];
-    res.params = chips[1] && chips[1].split('&');
-    return res;
-}
-
-const bodyPack = function (data) {
-    const req = {};
-    let body = [];
-    for (let [key, value] of Object.entries(data.params)) {
-        body.push(key + '=' + value);
-    }
-    req.body = body.join('&');
-    switch (data.type) {
-        case 'get':
-            req.query = `${data.url}?${req.body}`;
-            break;
-    }
-    return req;
-}
-
 const number = function (number) {
     if (typeof number == 'object') {
         const res = [];
