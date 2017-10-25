@@ -93,9 +93,7 @@ const parseUrl = function (url) {
 }
 
 export default {
-    bodyPack,
     formatTime,
-    bodyParse,
     parseMarkdown,
     readUserInfo,
     parseUrl,
