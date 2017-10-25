@@ -1,3 +1,5 @@
+import Php from './php'
+
 //无限分类赋值
 const storeClassification = function (object, dir, value, index = 0) {
   if (index == 0 && dir.length == 1) {
