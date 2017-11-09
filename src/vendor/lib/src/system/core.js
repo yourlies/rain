@@ -23,12 +23,12 @@ const readClassification = function (object, dir, index = 0) {
 }
 
 const readTreeClassification = function (object, tree, path) {
-  for (let [key, value] of Object.entries(tree)) {
-    object[key] = require(`../../../../${path}/${key}`);
-    if (!!value.child) {
-      readTreeClassification(object, value.child, path);
-    }
-  }
+  // for (let [key, value] of Object.entries(tree)) {
+    // object[key] = require(`../../../../${path}/${key}`);
+    // if (!!value.child) {
+      // readTreeClassification(object, value.child, path);
+    // }
+  // }
 }
 
 const bodyParse = function (req) {

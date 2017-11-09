@@ -6,24 +6,28 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 // 加载程序路由
 import routes from './router';
+
 // filter dirty routes
 for (let i = 0; i < routes.length; i++) {
-  routes[i].component = routes[i].component.default;
+  if (typeof routes[i].component == 'object'
+    && routes[0].component.default) {
+    routes[i].component = routes[i].component.default;    
+  }
 }
 
 // 初始化vue-router数据
 const routerOptions = {
-    mode: 'history',
-    base: __dirname,
-    routes
+  mode: 'history',
+  base: __dirname,
+  routes
 }
 // 实例化vue-router
 const router = new VueRouter(routerOptions);
 // 配置参数
 const options = {
-    appOptions: {
-        router
-    }
+  appOptions: {
+    router
+  }
 }
 // 输出router
 export default options;
