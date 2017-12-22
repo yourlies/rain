@@ -176,16 +176,6 @@ const delegation = {
     },
   },
   watch: {
-    '$route.path': function () {
-      if (this.unresolvedSubscriptions.length > 0) {
-        this.trigger('loadingstart');
-      }
-      for (let i = 0; i < this.unresolvedSubscriptions.length; i++) {
-        this.subscriptions.current[`subscription${this.unresolvedSubscriptions[i]['id']}`] = models.subscription(this.unresolvedSubscriptions[i]['subscription']);
-        this.subscriptions.currentCount++;
-        this.subscriptions.workload++;
-      }
-    },
     isBubbled: function () {
       this.handle();
     },
